@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 <div class="produkt-fotky">
                     <div class="hlavni-foto-obal">
-                        <img src="${polozka.Obrazky[0]}" alt="${polozka.Nazev}" id="hlavni-foto" class="produkt-hlavni-foto">
+                        <img src="${polozka.Obrazky[0]}" alt="${polozka.Nazev}" id="hlavni-foto" class="produkt-hlavni-foto fetchpriority="high"">
                         ${sipkyHtml}
                     </div>
                     ${nahledyHtml}
