@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // NASTAVENÍ AIRTABLE (Doplň své údaje!)
+    // NASTAVENÍ AIRTABLE (Ponechán tvůj fungující klíč)
     const AIRTABLE_TOKEN = 'patcLqGALRmNxZ3mA.f2cfd1f2d255cbccbc11f0154dc9474e50a3a85b1e47f15c636c064b2662c733'; 
     const BASE_ID = 'app81BJfSOvz5luMr';
     const TABLE_NAME = 'Produkty';
@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let aktualniKategorie = 'Vše';
     let hledanyText = '';
 
+    // HLAVNÍ FUNKCE PRO STAŽENÍ DAT
     async function nactiMenu() {
         try {
             const odpoved = await fetch(AIRTABLE_URL, {
@@ -29,11 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const data = await odpoved.json();
             
-            // Mapování dat z Airtable do formátu pro web
             vsechnoPecivo = data.records.map(zaznam => {
                 const p = zaznam.fields;
                 
-                // Ošetření obrázku z Airtable
                 const obrazekUrl = (p['Obrázek'] && p['Obrázek'].length > 0) 
                     ? p['Obrázek'][0].url 
                     : 'https://via.placeholder.com/400x300?text=Foto+připravujeme';
@@ -64,13 +63,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // FUNKCE PRO FILTROVÁNÍ A HLEDÁNÍ (S profesionálním Empty State)
     function aplikujFiltryAHledej() {
         let vysledek = vsechnoPecivo;
 
+        // 1. Aplikace filtru kategorií
         if (aktualniKategorie !== 'Vše') {
             vysledek = vysledek.filter(p => p.Kategorie === aktualniKategorie);
         }
 
+        // 2. Aplikace textového vyhledávání
         if (hledanyText) {
             vysledek = vysledek.filter(p => 
                 p.Nazev.toLowerCase().includes(hledanyText) || 
@@ -78,9 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
             );
         }
 
+        // 3. Vykreslení výsledku nebo Prázdného stavu
         if (vysledek.length === 0) {
             seznamPeciva.className = ''; 
-            // PROFESIONÁLNÍ EMPTY STATE
             seznamPeciva.innerHTML = `
                 <div class="prazdny-stav">
                     <div class="prazdny-stav-ikona">🥖</div>
@@ -90,12 +92,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
             
-            // Aktivace tlačítka pro reset vyhledávání
+            // Aktivace tlačítka pro zrušení hledání
             document.getElementById('reset-hledani').addEventListener('click', () => {
-                inputVyhledavani.value = '';
+                if(inputVyhledavani) inputVyhledavani.value = '';
                 hledanyText = '';
                 document.querySelectorAll('.filtr-btn').forEach(b => b.classList.remove('aktivni'));
-                document.querySelector('.filtr-btn').classList.add('aktivni'); // Vybere 'Vše'
+                const btnVse = document.querySelector('.filtr-btn');
+                if (btnVse) btnVse.classList.add('aktivni');
                 aktualniKategorie = 'Vše';
                 aplikujFiltryAHledej();
             });
@@ -105,7 +108,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Úryvek funkce pro vykreslení karet - přidán LAZY LOADING
+    // POSLUCHAČ PRO TEXTOVÉ POLE VYHLEDÁVÁNÍ
+    if (inputVyhledavani) {
+        inputVyhledavani.addEventListener('input', (e) => {
+            hledanyText = e.target.value.trim().toLowerCase();
+            aplikujFiltryAHledej();
+        });
+    }
+
+    // FUNKCE PRO VYKRESLENÍ KARET (S Lazy Loadingem)
     function vykresliProdukty(produktyKVykresleni) {
         seznamPeciva.innerHTML = ''; 
         seznamPeciva.classList.remove('mrizka-peciva');
@@ -113,7 +124,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const skupinyPodleKategorie = {};
         produktyKVykresleni.forEach(polozka => {
             const kat = polozka.Kategorie;
-            if (!skupinyPodleKategorie[kat]) skupinyPodleKategorie[kat] = [];
+            if (!skupinyPodleKategorie[kat]) {
+                skupinyPodleKategorie[kat] = [];
+            }
             skupinyPodleKategorie[kat].push(polozka);
         });
 
@@ -137,7 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const hmotnostText = polozka.Hmotnost ? `<span class="hmotnost">(~ ${polozka.Hmotnost})</span>` : '';
 
                 karta.innerHTML = `
-                    <!-- PŘIDÁNO: loading="lazy" pro brutální zrychlení Performance skóre -->
                     <img src="${polozka.ObrazekUrl}" alt="${polozka.Nazev}" class="karta-obrazek" loading="lazy">
                     <div class="karta-texty">
                         <h3>${polozka.Nazev}</h3>
@@ -159,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // FUNKCE PRO VYKRESLENÍ TLAČÍTEK KATEGORIÍ
     function vytvorFiltry() {
         const kategorieSet = new Set(vsechnoPecivo.map(p => p.Kategorie));
         const kategoriePole = ['Vše', ...kategorieSet]; 
@@ -183,5 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ZAVOLÁNÍ HLAVNÍ FUNKCE PŘI NAČTENÍ STRÁNKY
     nactiMenu();
 });
