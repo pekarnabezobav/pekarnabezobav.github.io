@@ -80,19 +80,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (vysledek.length === 0) {
             seznamPeciva.className = ''; 
-            seznamPeciva.innerHTML = '<p class="nacteni">Nic jsme nenašli. Zkuste hledat něco jiného.</p>';
+            // PROFESIONÁLNÍ EMPTY STATE
+            seznamPeciva.innerHTML = `
+                <div class="prazdny-stav">
+                    <div class="prazdny-stav-ikona">🥖</div>
+                    <h3>Tuhle dobrotu zrovna nemáme</h3>
+                    <p>Zkuste hledat něco jiného, nebo se podívejte na celou naši nabídku.</p>
+                    <button class="tlacitko" id="reset-hledani" style="margin-top: 15px;">Zobrazit celé menu</button>
+                </div>
+            `;
+            
+            // Aktivace tlačítka pro reset vyhledávání
+            document.getElementById('reset-hledani').addEventListener('click', () => {
+                inputVyhledavani.value = '';
+                hledanyText = '';
+                document.querySelectorAll('.filtr-btn').forEach(b => b.classList.remove('aktivni'));
+                document.querySelector('.filtr-btn').classList.add('aktivni'); // Vybere 'Vše'
+                aktualniKategorie = 'Vše';
+                aplikujFiltryAHledej();
+            });
+            
         } else {
             vykresliProdukty(vysledek);
         }
     }
 
-    if (inputVyhledavani) {
-        inputVyhledavani.addEventListener('input', (e) => {
-            hledanyText = e.target.value.trim().toLowerCase();
-            aplikujFiltryAHledej();
-        });
-    }
-
+    // Úryvek funkce pro vykreslení karet - přidán LAZY LOADING
     function vykresliProdukty(produktyKVykresleni) {
         seznamPeciva.innerHTML = ''; 
         seznamPeciva.classList.remove('mrizka-peciva');
@@ -100,9 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const skupinyPodleKategorie = {};
         produktyKVykresleni.forEach(polozka => {
             const kat = polozka.Kategorie;
-            if (!skupinyPodleKategorie[kat]) {
-                skupinyPodleKategorie[kat] = [];
-            }
+            if (!skupinyPodleKategorie[kat]) skupinyPodleKategorie[kat] = [];
             skupinyPodleKategorie[kat].push(polozka);
         });
 
@@ -126,7 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const hmotnostText = polozka.Hmotnost ? `<span class="hmotnost">(~ ${polozka.Hmotnost})</span>` : '';
 
                 karta.innerHTML = `
-                    <img src="${polozka.ObrazekUrl}" alt="${polozka.Nazev}" class="karta-obrazek">
+                    <!-- PŘIDÁNO: loading="lazy" pro brutální zrychlení Performance skóre -->
+                    <img src="${polozka.ObrazekUrl}" alt="${polozka.Nazev}" class="karta-obrazek" loading="lazy">
                     <div class="karta-texty">
                         <h3>${polozka.Nazev}</h3>
                         <p>${polozka.Popis.substring(0, 60)}...</p>
@@ -135,7 +147,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 `;
 
-                // Po kliknutí přesměruje na detail podle Airtable Record ID
                 karta.addEventListener('click', () => {
                     window.location.href = `produkt-detail.html?id=${polozka.documentId}`;
                 });
