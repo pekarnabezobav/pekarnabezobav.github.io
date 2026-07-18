@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // NASTAVENÍ AIRTABLE (Doplň své fungující údaje z Webzdarma)
+    // NASTAVENÍ AIRTABLE
     const AIRTABLE_TOKEN = 'patcLqGALRmNxZ3mA.f2cfd1f2d255cbccbc11f0154dc9474e50a3a85b1e47f15c636c064b2662c733'; 
     const BASE_ID = 'app81BJfSOvz5luMr';
     const TABLE_NAME = 'Produkty';
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 Jednotka: p['Jednotka'] || '',
                 Hmotnost: p['Hmotnost'] || '',
                 Alergeny: p['Alergeny'] || [], 
-                Obrazky: obrazkyPole // Předáváme pole obrázků
+                Obrazky: obrazkyPole
             };
 
             vykresliProdukt(polozka);
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const nahledy = document.querySelectorAll('.nahled-foto');
         let aktualniIndex = 0;
 
-        // Funkce pro změnu obrázku
+        // Funkce pro změnu obrázku (synchronizuje miniatury i Lightbox)
         function ukazObrazek(index) {
             if (index < 0) index = obrazky.length - 1;
             if (index >= obrazky.length) index = 0;
@@ -136,9 +136,15 @@ document.addEventListener('DOMContentLoaded', () => {
             
             nahledy.forEach(n => n.classList.remove('aktivni'));
             if(nahledy[aktualniIndex]) nahledy[aktualniIndex].classList.add('aktivni');
+
+            // Pokud existuje Lightbox, rovnou v něm změníme obrázek
+            const lightboxImg = document.querySelector('#galerie-lightbox .lightbox-img');
+            if (lightboxImg) {
+                lightboxImg.src = obrazky[aktualniIndex];
+            }
         }
 
-        // Klikání na šipky
+        // Klikání na šipky pod hlavní fotkou
         if (sipkaVlevo) sipkaVlevo.addEventListener('click', () => ukazObrazek(aktualniIndex - 1));
         if (sipkaVpravo) sipkaVpravo.addEventListener('click', () => ukazObrazek(aktualniIndex + 1));
 
@@ -152,19 +158,53 @@ document.addEventListener('DOMContentLoaded', () => {
         // Přiblížení obrázku (Lightbox) po kliknutí na hlavní fotku
         hlavniFoto.addEventListener('click', () => {
             let lightbox = document.getElementById('galerie-lightbox');
+            
             if (!lightbox) {
                 lightbox = document.createElement('div');
                 lightbox.id = 'galerie-lightbox';
                 lightbox.className = 'lightbox';
+                
+                // Generování šipek pro Lightbox, pokud je obrázků více
+                let lightboxSipkyHtml = '';
+                if (obrazky.length > 1) {
+                    lightboxSipkyHtml = `
+                        <button class="lightbox-sipka vlevo" id="lb-sipka-vlevo">&#10094;</button>
+                        <button class="lightbox-sipka vpravo" id="lb-sipka-vpravo">&#10095;</button>
+                    `;
+                }
+
                 lightbox.innerHTML = `
                     <span class="lightbox-zavrit">&times;</span>
+                    ${lightboxSipkyHtml}
                     <img class="lightbox-img" src="${hlavniFoto.src}">
                 `;
                 document.body.appendChild(lightbox);
                 
-                // Zavření při kliknutí mimo fotku
+                // Aktivace překlikávání v Lightboxu
+                if (obrazky.length > 1) {
+                    document.getElementById('lb-sipka-vlevo').addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        ukazObrazek(aktualniIndex - 1);
+                    });
+                    
+                    document.getElementById('lb-sipka-vpravo').addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        ukazObrazek(aktualniIndex + 1);
+                    });
+
+                    // Podpora klávesnice v Lightboxu
+                    document.addEventListener('keydown', (e) => {
+                        if (lightbox.classList.contains('zobrazeno')) {
+                            if (e.key === 'ArrowRight') ukazObrazek(aktualniIndex + 1);
+                            if (e.key === 'ArrowLeft') ukazObrazek(aktualniIndex - 1);
+                            if (e.key === 'Escape') lightbox.classList.remove('zobrazeno');
+                        }
+                    });
+                }
+                
+                // Zavření při kliknutí mimo fotku a mimo šipky
                 lightbox.addEventListener('click', (e) => {
-                    if (e.target !== lightbox.querySelector('.lightbox-img')) {
+                    if (e.target !== lightbox.querySelector('.lightbox-img') && !e.target.classList.contains('lightbox-sipka')) {
                         lightbox.classList.remove('zobrazeno');
                     }
                 });
@@ -172,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 lightbox.querySelector('.lightbox-img').src = hlavniFoto.src;
             }
             
-            // Timeout pro plynulou animaci
+            // Timeout pro plynulou CSS animaci
             setTimeout(() => lightbox.classList.add('zobrazeno'), 10);
         });
     }
