@@ -708,3 +708,64 @@ a {
         scroll-snap-align: start; 
     }
 }
+
+/* ==========================================================================
+   14. SKELETON LOADERS A EMPTY STATES (Profesionální UX)
+   ========================================================================== */
+
+/* Skeleton animace - Simulace načítání obsahu */
+@keyframes skeleton-loading {
+    0% { background-color: #e2e2e2; }
+    100% { background-color: #f0f0f0; }
+}
+
+.skeleton {
+    animation: skeleton-loading 1s linear infinite alternate;
+    border-radius: 8px;
+}
+
+.skeleton-karta {
+    background-color: var(--bila);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+.skeleton-img { height: 220px; width: 100%; border-radius: 0; }
+.skeleton-texty { padding: 20px; display: flex; flex-direction: column; gap: 12px; height: 100%; }
+.skeleton-nadpis { height: 24px; width: 70%; margin-bottom: 10px; }
+.skeleton-odstavec { height: 14px; width: 100%; }
+.skeleton-odstavec.kratky { width: 80%; }
+.skeleton-cena { height: 28px; width: 40%; margin-top: auto; }
+
+/* Empty state - Stav "Nenalezeno" */
+.prazdny-stav {
+    text-align: center;
+    padding: 60px 20px;
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--bila);
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+    border: 2px dashed #e0d5c1;
+}
+
+.prazdny-stav-ikona {
+    font-size: 3.5rem;
+    opacity: 0.6;
+    margin-bottom: 15px;
+    filter: grayscale(100%);
+}
+
+.prazdny-stav h3 {
+    font-size: 1.5rem;
+    color: var(--tmavy-chleb);
+    margin-bottom: 10px;
+}
