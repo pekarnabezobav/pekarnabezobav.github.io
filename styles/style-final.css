@@ -1,0 +1,812 @@
+/* =========================================
+   ZÁKLADNÍ NASTAVENÍ A PROMĚNNÉ
+   ========================================= */
+:root {
+    --zlata-kura: #D48C46;     /* Barva upečené kůrky */
+    --tmavy-chleb: #5C4033;    /* Tmavě hnědá pro nadpisy */
+    --kremova-svetla: #FBF9F6; /* Velmi jemné pozadí, připomínající mouku */
+    --text-bezny: #4A4A4A;     /* Měkčí černá pro čtení */
+    --bila: #FFFFFF;
+    --zelena-akcent: #6B8E23;  /* Zelená pro "zdravý/bezlepkový" pocit */
+    
+    --font-nadpisy: 'Playfair Display', serif;
+    --font-text: 'Poppins', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+section {
+    scroll-margin-top: 80px;
+}
+
+html, body {
+    height: 100%; /* Nutné pro správné fungování flexboxu */
+}
+
+*, *::before, *::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Rozšířeno na pseudo-elementy, pomáhá proti horizontálnímu scrollování */
+}
+
+main {
+    flex: 1 0 auto; /* Změněno z 'flex: 1' - donutí prostředek roztáhnout se, ale nesmrskávat patičku */
+    width: 100%;
+}
+
+body {
+    font-family: var(--font-text);
+    background-color: var(--kremova-svetla);
+    color: var(--text-bezny);
+    line-height: 1.7;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden; /* HLAVNÍ ZÁCHRANA PRO MOBILY: Tvrdě zakáže scrollování do boku */
+    width: 100%;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-nadpisy);
+    color: var(--tmavy-chleb);
+}
+
+.kontejner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* =========================================
+   NAVIGACE A HLAVIČKA
+   ========================================= */
+.navigace {
+    background-color: var(--bila);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-obsah {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+}
+
+.logo {
+    font-family: var(--font-nadpisy);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--tmavy-chleb);
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.nav-odkazy {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-odkazy a {
+    text-decoration: none;
+    color: var(--text-bezny);
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-odkazy a:hover {
+    color: var(--zlata-kura);
+}
+
+/* =========================================
+   HLAVNÍ UVÍTACÍ SEKCE (HERO)
+   ========================================= */
+.hero {
+    background: linear-gradient(rgba(92, 64, 51, 0.8), rgba(92, 64, 51, 0.6)), 
+                url('https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2072&auto=format&fit=crop') center/cover;
+    height: 70vh;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--bila);
+    padding: 20px;
+}
+
+.hero h1 {
+    color: var(--bila);
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+    font-weight: 300;
+}
+
+.tlacitko {
+    display: inline-block;
+    background-color: var(--zlata-kura);
+    color: var(--bila);
+    padding: 15px 35px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.tlacitko:hover {
+    background-color: #c77b35;
+    transform: translateY(-3px);
+}
+
+/* =========================================
+   SEKCE O NÁS
+   ========================================= */
+
+.sekce-o-nas {
+    padding: 4rem 0;
+    background-color: #fcf9f5;
+}
+
+.o-nas-obsah {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.o-nas-obsah h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #4a3b32;
+}
+
+.o-nas-obsah p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #5c4d44;
+    margin-bottom: 1rem;
+}
+
+/* Poslední odstavec před ikonami má větší spodní odsazení */
+.o-nas-obsah p:last-of-type {
+    margin-bottom: 2rem;
+}
+
+/* Flexbox pro rozložení ikon vedle sebe */
+.o-nas-ikony {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.ikona-box {
+    flex: 1;
+    min-width: 200px;
+}
+
+.ikona-box span {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.ikona-box h3 {
+    color: #4a3b32;
+    margin-bottom: 0.5rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.ikona-box p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* =========================================
+   DENNÍ MENU (FILTRY A KARTY)
+   ========================================= */
+.sekce-menu {
+    background-color: #F4EFE6;
+    padding: 80px 0;
+}
+
+.menu-hlavicka {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.menu-hlavicka h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+/* Tlačítka kategorií */
+.filtry {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.filtr-btn {
+    background-color: var(--bila);
+    border: 2px solid var(--zlata-kura);
+    color: var(--zlata-kura);
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.filtr-btn:hover, .filtr-btn.aktivni {
+    background-color: var(--zlata-kura);
+    color: var(--bila);
+}
+
+/* Mřížka pro produkty */
+.mrizka-peciva {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+/* Samotná karta produktu */
+.karta-peciva {
+    background-color: var(--bila);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    transition: all 0.4s ease;
+    border-top: 4px solid var(--kremova-svetla);
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.karta-peciva:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+    border-top-color: var(--zlata-kura);
+}
+
+.karta-obrazek {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-bottom: 3px solid var(--kremova-svetla);
+    transition: transform 0.4s ease;
+}
+
+.karta-peciva:hover .karta-obrazek {
+    transform: scale(1.05);
+}
+
+.karta-texty {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 220px);
+}
+
+.karta-texty h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.karta-texty p {
+    font-size: 0.95rem;
+    color: var(--text-bezny);
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+.cena {
+    display: inline-block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--zlata-kura);
+    font-family: var(--font-nadpisy);
+}
+
+/* Zprávy API */
+.nacteni, .chyba {
+    text-align: center;
+    grid-column: 1 / -1;
+    font-style: italic;
+    padding: 20px;
+}
+.chyba {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* --- VYHLEDÁVÁNÍ --- */
+.vyhledavani-kontejner {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.vyhledavani-input {
+    width: 100%;
+    max-width: 500px;
+    padding: 15px 25px;
+    border: 2px solid #e0d5c1;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-family: var(--font-text);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    transition: all 0.3s;
+    outline: none;
+}
+
+.vyhledavani-input:focus {
+    border-color: var(--zlata-kura);
+    box-shadow: 0 4px 20px rgba(212, 140, 70, 0.15);
+}
+
+/* =========================================
+   DETAIL PRODUKTU (produkt-detail.html)
+   ========================================= */
+.tlacitko-zpet {
+    display: inline-block;
+    color: var(--text-bezny);
+    text-decoration: none;
+    font-weight: 500;
+    margin-bottom: 30px;
+    transition: color 0.3s;
+}
+
+.tlacitko-zpet:hover {
+    color: var(--zlata-kura);
+}
+
+.produkt-stranka-mrizka {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: start;
+}
+
+.produkt-hlavni-foto {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 16px;
+    object-fit: contain;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+    border: 3px solid var(--bila);
+}
+
+.produkt-galerie {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.produkt-nahled {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.produkt-nahled:hover {
+    opacity: 1;
+    border-color: var(--zlata-kura);
+}
+
+.produkt-kategorie {
+    display: inline-block;
+    background-color: var(--bila);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--zlata-kura);
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+}
+
+.produkt-info h1 {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+    line-height: 1.1;
+}
+
+.produkt-cena {
+    font-family: var(--font-nadpisy);
+    font-size: 2.5rem;
+    color: var(--zlata-kura);
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.produkt-popis {
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    line-height: 1.8;
+}
+
+/* Box pro alergeny */
+.box-alergeny {
+    background-color: #fff0f0;
+    border-left: 5px solid #e74c3c;
+    padding: 20px;
+    border-radius: 8px;
+    color: #c0392b;
+}
+
+/* =========================================
+   SEKCE OTEVÍRACÍ DOBA
+   ========================================= */
+.sekce-oteviraci-doba {
+    padding: 80px 0;
+    background-color: var(--bila);
+}
+
+.oteviraci-obsah {
+    max-width: 650px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.oteviraci-obsah h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.oteviraci-obsah p {
+    margin-bottom: 40px;
+    color: var(--text-bezny);
+    font-size: 1.1rem;
+}
+
+/* Elegantní karta pro výpis hodin */
+.oteviraci-karta {
+    background-color: var(--kremova-svetla);
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    border-top: 4px solid var(--zlata-kura);
+}
+
+.seznam-doba {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Formátování jednotlivých dnů */
+.seznam-doba li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+    border-bottom: 1px dashed #d1c8b8; /* Jemná čárkovaná čára inspirovaná účtenkou/receptem */
+    font-size: 1.1rem;
+    color: var(--tmavy-chleb);
+}
+
+.seznam-doba li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.seznam-doba li:first-child {
+    padding-top: 0;
+}
+
+.seznam-doba strong {
+    font-weight: 600;
+}
+
+/* Zvýraznění zavíracího dne */
+.seznam-doba .zavreno {
+    color: var(--text-bezny);
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* Úprava pro mobilní zařízení (aby se text u neděle nezalomil ošklivě) */
+@media (max-width: 600px) {
+    .seznam-doba li {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+/* =========================================
+   PATIČKA
+   ========================================= */
+.paticka {
+    flex-shrink: 0; /* Zabrání prohlížeči, aby patičku zdeformoval/zmenšil */
+    width: 100%;
+    background-color: var(--tmavy-chleb);
+    color: #e0d5c1;
+    padding: 60px 0 20px 0;
+}
+
+.paticka-mrizka {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.paticka-sloupec h3 {
+    color: var(--bila);
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.paticka-sloupec p {
+    margin-bottom: 10px;
+}
+
+.mapa-kontejner {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden; /* Důležité: ořízne rohy samotné mapy podle border-radius */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin-top: 15px;
+}
+
+.mapa-kontejner iframe {
+    display: block; /* Odstraní drobnou spodní mezeru, kterou iframe občas generuje */
+}
+
+.paticka-spodek {
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 20px;
+    font-size: 0.9rem;
+}
+
+/* =========================================
+   RESPONZIVITA (Mobily a tablety)
+   ========================================= */
+@media (max-width: 900px) {
+    .produkt-stranka-mrizka {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-odkazy {
+        display: none; /* Skryje odkazy na malém displeji pro čistotu */
+    }
+    
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    
+    .sekce-o-nas {
+        flex-direction: column;
+        padding: 50px 24px;
+    }
+    
+    .o-nas-ilustrace {
+        width: 100%;
+        height: 300px;
+    }
+    
+    .odznak {
+        width: 100px;
+        height: 100px;
+        font-size: 0.9rem;
+        bottom: -15px;
+        left: -15px;
+    }
+    
+    .produkt-info h1 {
+        font-size: 2.2rem;
+    }
+
+    /* PŘIDEJ TOTO: Zmenšení dlouhé ceny na malých displejích */
+    .produkt-cena {
+        font-size: 1.6rem; 
+        word-wrap: break-word; /* Dovolí zalomení textu, pokud je moc dlouhý */
+    }
+
+    /* PŘIDEJ TOTO: Zlepšení pozice křížku pro zavření fotky na mobilu */
+    .lightbox-zavrit {
+        top: 15px;
+        right: 20px; 
+        font-size: 35px;
+    }
+}
+
+/* =========================================
+   ROZDĚLENÍ PODLE KATEGORIÍ (Hybridní styl)
+   ========================================= */
+
+.kategorie-sekce {
+    margin-bottom: 50px;
+    animation: nabehKategorie 0.4s ease-out;
+}
+
+@keyframes nabehKategorie {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.kategorie-nadpis {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--zlata-kura);
+    display: inline-block;
+    color: var(--tmavy-chleb);
+}
+
+/* Výchozí zobrazení pro PC = Přehledná mřížka */
+.kategorie-pruh {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.karta-horizontalni {
+    width: 100%; /* Na PC se přizpůsobí mřížce */
+}
+
+
+/* =========================================
+   PŘEPNUTÍ NA "NETFLIX" STYL JEN PRO MOBILY
+   ========================================= */
+@media (max-width: 768px) {
+    .kategorie-pruh {
+        /* Změní mřížku na horizontální pruh */
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 15px;
+        
+        /* Skrytí posuvníku */
+        scrollbar-width: none; 
+        -ms-overflow-style: none;  
+        
+        /* Přichytávání karet */
+        scroll-snap-type: x mandatory; 
+    }
+
+    .kategorie-pruh::-webkit-scrollbar {
+        display: none;
+    }
+
+    .karta-horizontalni {
+        /* Pevná šířka karty, aby se daly swajpovat do boku */
+        min-width: 250px; 
+        max-width: 250px;
+        flex-shrink: 0; 
+        scroll-snap-align: start; 
+    }
+}
+
+/* --- FUNKCE GALERIE --- */
+.produkt-fotky {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.hlavni-foto-obal {
+    position: relative;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: zoom-in; /* Změní kurzor na lupu */
+}
+
+/* Šipky na obrázku */
+.galerie-sipka {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.85);
+    border: none;
+    font-size: 20px;
+    padding: 12px 18px;
+    cursor: pointer;
+    border-radius: 50%;
+    color: #5C4033;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.galerie-sipka:hover {
+    background: #D48C46;
+    color: white;
+}
+
+.galerie-sipka.vlevo { left: 15px; }
+.galerie-sipka.vpravo { right: 15px; }
+
+/* Malé náhledy dole */
+.galerie-nahledy {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+
+.nahled-foto {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s ease, border 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.nahled-foto:hover, .nahled-foto.aktivni {
+    opacity: 1;
+    border-color: #D48C46;
+}
+
+/* --- LIGHTBOX (Zvětšení na celou obrazovku) --- */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none; /* Skryje prvek před klikáním, když je neviditelný */
+    transition: opacity 0.3s ease;
+}
+
+.lightbox.zobrazeno {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.lightbox-img {
+    max-width: 90vw; /* Omezí šířku na 90 % šířky obrazovky */
+    max-height: 80vh; /* Omezí výšku a nechá nahoře prostor pro křížek */
+    object-fit: contain; /* Zabere maximum místa, ale nikdy se neořízne ani nedeformuje */
+    border-radius: 12px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.6);
+}
+
+.lightbox-zavrit {
+    position: absolute;
+    top: 25px;
+    right: 40px;
+    color: white;
+    font-size: 45px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.lightbox-zavrit:hover {
+    color: #D48C46;
+}

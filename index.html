@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bez Obav | Rodinná bezlepková pekárna</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles/style-final.css">
+</head>
+<body>
+
+    <nav class="navigace">
+        <div class="kontejner nav-obsah">
+            <a href="#" class="logo">🌾 Bez Obav</a>
+            <ul class="nav-odkazy">
+                <li><a href="#o-nas">O nás</a></li>
+                <li><a href="#menu">Dnešní menu</a></li>
+                <li><a href="#oteviraci-doba">Otevírací doba</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-obsah">
+            <h1>Vaše rodinná<br>bezlepková pekárna</h1>
+            <p>Pečeme s láskou, z poctivých surovin a se 100% jistotou bez lepku. Každý den čerstvé a voňavé.</p>
+            <p>Vytvořeno s láskou k poctivému řemeslu.</p>
+            <a href="#menu" class="tlacitko">Zobrazit dnešní nabídku</a>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- SEKCE: O NÁS -->
+        <section id="o-nas" class="sekce-o-nas">
+            <div class="kontejner">
+                <div class="o-nas-obsah">
+                    <h2>Příběh pekárny Bez Obav</h2>
+                    <p>
+                        Víme, jak těžké je najít opravdu dobré, voňavé a měkké pečivo, když musíte nebo chcete vyřadit ze svého jídelníčku lepek. Naše rodinná pekárna vznikla z touhy vrátit radost z jídla všem celiakům a lidem s intolerancí.
+                    </p>
+                    <p>
+                        Pečeme výhradně ve <strong>100% bezlepkovém prostředí</strong>. Nemusíte se tak bát žádné křížové kontaminace. Využíváme vlastní rodinné receptury, kvalitní přirozeně bezlepkové mouky a především pečeme s láskou, jako bychom pekli pro vlastní rodinu.
+                    </p>
+                    
+                    <div class="o-nas-ikony">
+                        <div class="ikona-box">
+                            <span>🛡️</span>
+                            <h3>100% Bezpečné</h3>
+                            <p>Žádné stopy lepku. Přísně kontrolované suroviny i prostředí.</p>
+                        </div>
+                        <div class="ikona-box">
+                            <span>🥖</span>
+                            <h3>Čerstvé denně</h3>
+                            <p>Každé ráno zaděláváme na čerstvé chleby, housky i sladké koláče.</p>
+                        </div>
+                        <div class="ikona-box">
+                            <span>❤️</span>
+                            <h3>Rodinný přístup</h3>
+                            <p>Poctivé řemeslo bez zbytečné chemie a náhražek.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="menu" class="sekce-menu">
+            <div class="kontejner">
+                <div class="menu-hlavicka">
+                    <h2>Dnešní čerstvé z pece</h2>
+                    <p>Vyberte si kategorii nebo začněte psát, na co máte chuť.</p>
+                </div>
+
+                <div class="vyhledavani-kontejner">
+                    <input type="text" id="vyhledavani" placeholder="Hledat dobrotu (např. rohlík, čokoláda...)" class="vyhledavani-input">
+                </div>
+                
+                <div id="filtry-kategorii" class="filtry"></div>
+
+                <div id="seznam-peciva" class="mrizka-peciva">
+                    <p class="nacteni">Načítám voňavou galerii...</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="oteviraci-doba" class="sekce-oteviraci-doba">
+            <div class="kontejner">
+                <div class="oteviraci-obsah">
+                    <h2>Kdy máme upečeno?</h2>
+                    <p>Zastavte se pro čerstvé pečivo. Každé ráno pro vás otevíráme s plnými pulty.</p>
+                    
+                    <div class="oteviraci-karta">
+                        <ul class="seznam-doba">
+                            <li>
+                                <strong>Pondělí - Pátek</strong> 
+                                <span>07:00 - 17:00</span>
+                            </li>
+                            <li>
+                                <strong>Sobota</strong> 
+                                <span>08:00 - 12:00</span>
+                            </li>
+                            <li class="zavreno">
+                                <strong>Neděle</strong> 
+                                <span>Zavřeno (odpočíváme a hledáme novou inspiraci)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="kontakt" class="paticka">
+        <div class="kontejner paticka-mrizka">
+            
+            <div class="paticka-sloupec">
+                <h3>🥖 Bez Obav</h3>
+                <p>Vracíme radost z pečiva všem, kteří musí nebo chtějí žít bez lepku.</p>
+            </div>
+            
+            <div class="paticka-sloupec">
+                <h3>Kontakt</h3>
+                <p>Hlavní třída 123/45</p>
+                <p>737 01 Český Těšín</p>
+                <p style="margin-top: 15px;"><strong>Tel:</strong> +420 123 456 789</p>
+                <p><strong>E-mail:</strong> info@bezobav.cz</p>
+            </div>
+            
+            <div class="paticka-sloupec">
+                <h3>Kde nás najdete</h3>
+                <div class="mapa-kontejner">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3078.717622815853!2d18.565678176812554!3d49.739636438288294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471406c2a2d69a75%3A0x3954369a52625ce4!2zTWlzdMWZb3ZpY2vDoSwgNzM1IDYyIMSMZXNrw70gVMSbxaHDrW4gNg!5e1!3m2!1scs!2scz!4v1784133111474!5m2!1scs!2scz"
+                        width="100%" 
+                        height="180" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
+        </div>
+        
+        <div class="paticka-spodek">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> Pekárna Bez Obav. Všechna práva vyhrazena.</p>
+        </div>
+    </footer>
+
+    <script src="scripts/index.js"></script>
+</body>
+</html>
