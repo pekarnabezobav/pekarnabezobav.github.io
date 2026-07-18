@@ -152,8 +152,9 @@ a {
    6. HERO SEKCE (Uvítání)
    -------------------------------------------------------------------------- */
 .hero {
+    /* Původní gradient zůstává pro ztmavení, mění se jen cesta k url() */
     background: linear-gradient(rgba(92, 64, 51, 0.8), rgba(92, 64, 51, 0.6)), 
-                url('https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2072&auto=format&fit=crop') center/cover;
+                url('../images/hero-pozadi.webp') center/cover;
     height: 70vh;
     min-height: 500px;
     display: flex;
