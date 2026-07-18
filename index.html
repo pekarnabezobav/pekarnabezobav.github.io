@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bez Obav | Rodinná bezlepková pekárna</title>
     
+    <!-- 1. Zrychlené připojení Google Fonts (Oprava varování Render-blocking) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- 2. Preload pro LCP (Prohlížeč stáhne hlavní fotku bleskově ještě před čtením CSS) -->
+    <link rel="preload" as="image" href="images/hero-pozadi.webp" fetchpriority="high">
     
     <link rel="stylesheet" href="styles/style-final.css">
 </head>
