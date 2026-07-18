@@ -571,6 +571,35 @@ a {
 
 .lightbox-zavrit:hover { color: var(--zlata-kura); }
 
+.lightbox-sipka {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 50px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+    padding: 20px;
+    z-index: 10000;
+}
+
+.lightbox-sipka:hover { 
+    color: var(--bila); 
+    transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-sipka.vlevo { left: 20px; }
+.lightbox-sipka.vpravo { right: 20px; }
+
+/* Skrytí šipek na mobilech, kde se často swajpuje, nebo jejich zmenšení */
+@media (max-width: 768px) {
+    .lightbox-sipka { font-size: 35px; padding: 10px; }
+    .lightbox-sipka.vlevo { left: 5px; }
+    .lightbox-sipka.vpravo { right: 5px; }
+}
+
 /* --------------------------------------------------------------------------
    11. SEKCE: OTEVÍRACÍ DOBA
    -------------------------------------------------------------------------- */
