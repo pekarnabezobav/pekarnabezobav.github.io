@@ -7,14 +7,14 @@
    -------------------------------------------------------------------------- */
 :root {
     /* Barvy */
-    --zlata-kura: #D48C46;     /* Hlavní akcentní barva */
-    --zlata-kura-hover: #c77b35; 
-    --tmavy-chleb: #5C4033;    /* Nadpisy a patička */
+    --zlata-kura: #A65D14;     /* Hlavní akcentní barva */
+    --zlata-kura-hover: #8F4E0E; 
+    --tmavy-chleb: #4A332A;    /* Nadpisy a patička */
     --kremova-svetla: #FBF9F6; /* Pozadí stránek */
     --kremova-tmavsi: #F4EFE6; /* Pozadí sekce menu */
-    --text-bezny: #4A4A4A;     /* Běžný text */
+    --text-bezny: #3A3A3A;     /* Běžný text */
     --bila: #FFFFFF;
-    --chyba-cervena: #e74c3c;
+    --chyba-cervena: #D63031;
     
     /* Typografie */
     --font-nadpisy: 'Playfair Display', serif;
@@ -376,7 +376,7 @@ a {
 
 .hmotnost {
     font-size: 0.85rem;
-    color: #888;
+    color: #555555;
     display: block;
     margin-top: 5px;
 }
