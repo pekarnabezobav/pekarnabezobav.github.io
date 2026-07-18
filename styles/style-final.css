@@ -643,7 +643,12 @@ a {
 
 .seznam-doba li:last-child { border-bottom: none; }
 .seznam-doba strong { font-weight: 600; }
-.seznam-doba .zavreno { color: var(--text-bezny); font-style: italic; opacity: 0.8; }
+.seznam-doba .zavreno, 
+.seznam-doba em,
+em { 
+    color: #555555; 
+    font-style: italic; 
+}
 
 /* --------------------------------------------------------------------------
    12. PATIČKA (Odtlačená dolů díky flexboxu)
