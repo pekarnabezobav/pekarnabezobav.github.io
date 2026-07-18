@@ -99,12 +99,15 @@ a {
     padding: 15px 35px;
     border-radius: 30px;
     font-weight: 600;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .tlacitko:hover {
     background-color: var(--zlata-kura-hover);
     transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(212, 140, 70, 0.4);
 }
 
 /* --------------------------------------------------------------------------
@@ -482,15 +485,20 @@ a {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     border: none;
-    font-size: 20px;
-    padding: 12px 18px;
+    /* Pevné rozměry zaručí dokonalý kruh */
+    width: 48px; 
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     border-radius: 50%;
     color: var(--tmavy-chleb);
+    font-size: 1.2rem;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .galerie-sipka:hover {
