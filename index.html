@@ -5,14 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Rodinná bezlepková pekárna Bez Obav. Pečeme s láskou, ze 100% bezlepkových surovin. Čerstvý chléb a sladkosti každý den.">
     <title>Bez Obav | Rodinná bezlepková pekárna</title>
-    
-    <!-- 1. Zrychlené připojení Google Fonts (Oprava varování Render-blocking) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+    <!-- 1. SEO: Meta Popisek -->
+    <meta name="description" content="Rodinná bezlepková pekárna Bez Obav. Pečeme s láskou, ze 100% bezlepkových surovin. Čerstvý chléb a sladkosti každý den.">
+    
     <!-- 2. Preload pro LCP (Prohlížeč stáhne hlavní fotku bleskově ještě před čtením CSS) -->
     <link rel="preload" as="image" href="images/hero-pozadi.webp" fetchpriority="high">
+    
+    <!-- 3. Asynchronní Google Fonty (Odstraní "Render-blocking" penalizaci) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600&display=swap">
+    </noscript>
     
     <link rel="stylesheet" href="styles/style-final.css">
 </head>
