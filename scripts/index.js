@@ -198,4 +198,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ZAVOLÁNÍ HLAVNÍ FUNKCE PŘI NAČTENÍ STRÁNKY
     nactiMenu();
+
+
+    //novéééé
+
+    // Moderní obsluha interních odkazů (Smooth Scroll bez změny URL)
+    document.querySelectorAll('a[href^="#"]').forEach(odkaz => {
+        odkaz.addEventListener('click', function(udalost) {
+            
+            // Zastavíme prohlížeč – do URL se díky tomu hashtag vůbec nedostane
+            udalost.preventDefault();
+
+            const cil = this.getAttribute('href');
+
+            // Pokud je to pouze samotný # (Logo), vyjedeme nahoru
+            if (cil === '#') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
+
+            // Pokud je to konkrétní sekce (např. #o-nas), plynule k ní dojedeme
+            const cilovyElement = document.querySelector(cil);
+            if (cilovyElement) {
+                cilovyElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+    
+    //novéééé
 });
