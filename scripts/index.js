@@ -212,6 +212,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 top: 0,
                 behavior: 'smooth'
             });
+
+            // 3. AKTIVNĚ VYMAŽE hashtag z URL adresy (pokud tam byl)
+            history.replaceState(null, null, window.location.pathname);
         });
     }
     
