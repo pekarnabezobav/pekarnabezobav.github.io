@@ -1,26 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     const parametryZUrl = new URLSearchParams(window.location.search);
-    let produktId = parametryZUrl.get('id');
+    const produktId = parametryZUrl.get('id');
+    const kontejnerDetailu = document.getElementById('detail-produktu');
 
-    // 1. Zjistíme, zda máme ID
     if (!produktId) {
-        // Zkusíme, zda ID nezůstalo v paměti (pro případ, že uživatel dal F5 - Obnovit stránku)
-        produktId = sessionStorage.getItem('aktivniProdukt');
-        
-        // Pokud ho nemáme nikde, vrátíme uživatele na hlavní stranu
-        if (!produktId) {
-            window.location.href = 'index.html';
-            return;
-        }
-    } else {
-        // 2. Máme ID z URL. Uložíme ho do paměti pro případné obnovení stránky
-        sessionStorage.setItem('aktivniProdukt', produktId);
-        
-        // 3. KOUZLO: Vymažeme "?id=..." z adresního řádku, takže zůstane jen čistá URL
-        window.history.replaceState({}, document.title, window.location.pathname);
+        window.location.href = 'index.html';
+        return;
     }
-
+    
     // NASTAVENÍ AIRTABLE
     const AIRTABLE_TOKEN = 'patcLqGALRmNxZ3mA.f2cfd1f2d255cbccbc11f0154dc9474e50a3a85b1e47f15c636c064b2662c733'; 
     const BASE_ID = 'app81BJfSOvz5luMr';
