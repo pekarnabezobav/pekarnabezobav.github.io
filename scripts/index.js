@@ -198,4 +198,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ZAVOLÁNÍ HLAVNÍ FUNKCE PŘI NAČTENÍ STRÁNKY
     nactiMenu();
+
+
+
+    //aaaaaaaaaaaaaaaaaaaaa
+
+        // ELEGANTNÍ SCROLLOVÁNÍ BEZ HASHTAGŮ V URL
+    document.querySelectorAll('.nav-odkazy a[href^="#"], .hero a[href^="#"]').forEach(odkaz => {
+        odkaz.addEventListener('click', function(e) {
+            // Zabráníme výchozímu chování (tedy skoku a přepsání URL adresy)
+            e.preventDefault();
+    
+            // Získáme cíl (např. "#menu")
+            const ciloveId = this.getAttribute('href');
+            
+            // Pokud je odkaz jen "#" (např. logo), odscrolujeme nahoru
+            if (ciloveId === '#') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
+    
+            // Najdeme cílovou sekci na stránce
+            const cilovaSekce = document.querySelector(ciloveId);
+            
+            // Pokud sekce existuje, odscrolujeme k ní
+            if (cilovaSekce) {
+                cilovaSekce.scrollIntoView({
+                    behavior: 'smooth' // CSS už to sice umí, ale pro jistotu definujeme i zde
+                });
+            }
+        });
+    });
+
+    //aaaaaaaaaaaaaaaaa
+
+
+    
 });
