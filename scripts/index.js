@@ -198,24 +198,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ZAVOLÁNÍ HLAVNÍ FUNKCE PŘI NAČTENÍ STRÁNKY
     nactiMenu();
-
-    // Zachycení kliknutí na logo POUZE na hlavní stránce (kde href="#")
-    const logoHlavniStranka = document.querySelector('.logo[href="#"]');
-    
-    if (logoHlavniStranka) {
-        logoHlavniStranka.addEventListener('click', (e) => {
-            // 1. Zabrání výchozímu chování (zapsání hashtagu do URL adresy)
-            e.preventDefault(); 
-            
-            // 2. Plynule vyroluje na úplný začátek stránky
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-
-            // 3. AKTIVNĚ VYMAŽE hashtag z URL adresy (pokud tam byl)
-            history.replaceState(null, null, window.location.pathname);
-        });
-    }
-    
 });
